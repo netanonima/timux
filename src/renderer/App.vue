@@ -52,9 +52,15 @@ onMounted(() => {
     else if(timerRunning.value==true && paused.value==false){
       pauseTimer();
     }
-
   })
 
+  window.electronAPI.onInfo(()=>{
+    alert("Shortcuts : \nStart/stop time : Ctrl/cmd+numpad0 \nPause/unpause : Ctrl/cmd+numpad1");
+  })
+
+  window.electronAPI.onAbout(()=>{
+    alert("Created by netanonima in 2023\n");
+  })
 
   setInterval(function(){
     if(timerRunning.value==true && paused.value==false) {

@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain, session, globalShortcut} from 'electron';
+import {app, BrowserWindow, ipcMain, session, globalShortcut, Menu} from 'electron';
 import {join} from 'path';
 
 function createWindow () {
@@ -10,8 +10,36 @@ function createWindow () {
       nodeIntegration: false,
       contextIsolation: true,
     },
-    resizable: false
+    resizable: false,
+    fullscreenable: false
   });
+
+  const menu = Menu.buildFromTemplate([
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'info',
+          click: ()=>{
+            mainWindow.webContents.send('info', '');
+          }
+        },
+        {
+          label: 'about',
+          click: ()=>{
+            mainWindow.webContents.send('about', '');
+          }
+        },
+        {
+          label: 'quit',
+          click: ()=>{
+            mainWindow.close();
+          }
+        }
+      ]
+    }
+  ])
+  Menu.setApplicationMenu(menu);
 
   //mainWindow.setMenu(null);
 
