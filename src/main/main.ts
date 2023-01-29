@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain, session} from 'electron';
+import {app, BrowserWindow, ipcMain, session, globalShortcut} from 'electron';
 import {join} from 'path';
 
 function createWindow () {
@@ -12,13 +12,23 @@ function createWindow () {
     }
   });
 
+  //mainWindow.setMenu(null);
+
   if (process.env.NODE_ENV === 'development') {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   }
   else {
-    mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
+    mainWindow.loadFile(join(app.getAppPath(), 'timux', 'index.html'));
   }
+
+  globalShortcut.register('num0', () => {
+    mainWindow.webContents.send('0shortcut', '');
+  });
+
+  globalShortcut.register('num1', () => {
+    mainWindow.webContents.send('1shortcut', '');
+  });
 }
 
 app.whenReady().then(() => {
