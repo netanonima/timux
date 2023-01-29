@@ -15,9 +15,17 @@ function stopTimer() {
 }
 
 function startTimer() {
-  paused.value = false;
-  startingTime.value = moment().add(1, 'hours');
-  timerRunning.value = true;
+  if(timerRunning.value==false){
+    if(moment(now.value).format('HH:mm:ss.SS')!='00:00:00.00'){
+      now.value=moment('00:00:00.000', 'HH:mm:ss.SSS');
+    }else{
+      paused.value = false;
+      startingTime.value = moment().add(1, 'hours');
+      timerRunning.value = true;
+    }
+  }else{
+    stopTimer();
+  }
 }
 
 function pauseTimer() {
@@ -34,15 +42,7 @@ function unpauseTimer() {
 
 onMounted(() => {
   window.electronAPI.on0Shortcut(()=>{
-    if(timerRunning.value==false){
-      if(moment(now.value).format('HH:mm:ss.SS')!='00:00:00.00'){
-        now.value=moment('00:00:00.000', 'HH:mm:ss.SSS');
-      }else{
-        startTimer();
-      }
-    }else{
-      stopTimer();
-    }
+    startTimer();
   });
 
   window.electronAPI.on1Shortcut(()=>{
@@ -97,7 +97,7 @@ onMounted(() => {
         </span>
       </span>
     </div>
-    <!--
+  <!--
     <hr>
     <div>
       <span>
@@ -119,12 +119,12 @@ onMounted(() => {
             start timer
           </span>
           <span v-else>
-            restart timer
+            reset timer
           </span>
         </button>
       </span>
     </div>
-    -->
+  -->
   </div>
 </template>
 <style>

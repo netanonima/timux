@@ -1,6 +1,6 @@
 {
-  "name": "electron-vue-template",
-  "version": "0.1.0",
+  "name": "timux",
+  "version": "1.0.0",
   "description": "A minimal Electron + Vue application",
   "main": "build/main/main.js",
   "scripts": {

@@ -3,13 +3,14 @@ import {join} from 'path';
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 484,
+    height: 115,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
-    }
+    },
+    resizable: false
   });
 
   //mainWindow.setMenu(null);
@@ -19,14 +20,14 @@ function createWindow () {
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   }
   else {
-    mainWindow.loadFile(join(app.getAppPath(), 'timux', 'index.html'));
+    mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
   }
 
-  globalShortcut.register('num0', () => {
+  globalShortcut.register('Ctrl+num0', () => {
     mainWindow.webContents.send('0shortcut', '');
   });
 
-  globalShortcut.register('num1', () => {
+  globalShortcut.register('Ctrl+num1', () => {
     mainWindow.webContents.send('1shortcut', '');
   });
 }
