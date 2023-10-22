@@ -23,7 +23,7 @@
     "electron": "^22.3.25",
     "electron-builder": "^23.6.0",
     "typescript": "^4.8.4",
-    "vite": "^4.0.4"
+    "vite": "^4.0.5"
   },
   "dependencies": {
     "moment": "^2.29.4",
